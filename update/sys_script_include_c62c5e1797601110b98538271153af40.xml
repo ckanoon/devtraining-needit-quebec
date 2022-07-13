@@ -11,19 +11,25 @@
 NeedItUtils.prototype = {
     initialize: function() {
     },
-isDatePast: function(strDate){
+isDateToday: function(strDate){
+    
     // Create GlideDateTime objects for the current date and the passed in date
     var rightnow = new GlideDateTime();
     var testdate = new GlideDateTime(strDate);
-    
-    // If the testdate is before rightnow, return true, else return false
-    if (testdate.before(rightnow)) {
-      return true;
-    }
-    else {
-      return false;
-    }
+    // Get the date portion of rightnow and testdate (no timestamp)
+    var today = rightnow.getLocalDate();
+    // pass the When needed field value to the isDateToday method in NeedItUtils
+  var isToday = niutils.isDateToday(current.u_when_needed);
+  
+  // if the isDateToday method returns true the When needed date is today 
+  if(isToday == true){
+    gs.addErrorMessage("You cannot submit NeedIt requests for today.");
+    current.setAbortAction(true);
+  }
   },
+
+	
+	
 	
 	
 	
@@ -33,13 +39,13 @@ isDatePast: function(strDate){
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2022-07-13 02:09:18</sys_created_on>
         <sys_id>c62c5e1797601110b98538271153af40</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_name>NeedItUtils</sys_name>
         <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
         <sys_update_name>sys_script_include_c62c5e1797601110b98538271153af40</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-07-13 02:09:18</sys_updated_on>
+        <sys_updated_on>2022-07-13 02:51:47</sys_updated_on>
     </sys_script_include>
 </record_update>
